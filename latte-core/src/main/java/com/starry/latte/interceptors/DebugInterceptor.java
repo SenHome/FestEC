@@ -2,9 +2,10 @@ package com.starry.latte.interceptors;
 
 import android.support.annotation.RawRes;
 
+import com.starry.latte.util.FileUtil;
+
 import java.io.IOException;
 
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
 import okhttp3.Response;
@@ -17,11 +18,11 @@ import okhttp3.ResponseBody;
 public class DebugInterceptor extends BaseInterceptor {
 
    private final String DEBUG_URL;
-   private final int DEBUT_RAW_ID;
+   private final int DEBUG_RAW_ID;
 
     public DebugInterceptor(String base_url, int debut_raw_id) {
         this.DEBUG_URL = base_url;
-        this.DEBUT_RAW_ID = debut_raw_id;
+        this.DEBUG_RAW_ID = debut_raw_id;
     }
 
     //获取json文件
@@ -36,12 +37,17 @@ public class DebugInterceptor extends BaseInterceptor {
                 .build();
     }
 
-    private Response DebugResponse(Chain chain,@RawRes int rawID){
-//        final String json =
+    private Response debugResponse(Chain chain,@RawRes int rawId){
+        final String json = FileUtil.getRawFile(rawId);
+        return getResponse(chain, json);
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        return null;
+        final String url = chain.request().url().toString();
+        if (url.contains(DEBUG_URL)) {
+            return debugResponse(chain, DEBUG_RAW_ID);
+        }
+        return chain.proceed(chain.request());
     }
 }
