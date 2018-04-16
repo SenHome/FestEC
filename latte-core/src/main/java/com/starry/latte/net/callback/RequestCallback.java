@@ -78,7 +78,7 @@ public class RequestCallback implements Callback<String>{
                 public void run() {
                     LatteLoader.stopLoading();
                 }
-            },10000);
+            },1000);
         }
     }
 }
