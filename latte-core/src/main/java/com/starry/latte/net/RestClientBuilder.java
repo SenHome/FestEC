@@ -8,6 +8,7 @@ import com.starry.latte.net.callback.IRequest;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -33,6 +34,8 @@ public class RestClientBuilder {
 
     private LoaderStyle mLoaderStyle= null;
     private Context mContext= null;
+
+    private File mFile = null;
 
     //只允许同包的RestClient
     RestClientBuilder(){
@@ -61,6 +64,17 @@ public class RestClientBuilder {
         this.mRequestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),raw);
         return this;
     }
+
+    //上传文件
+    public final RestClientBuilder file(File file){
+        this.mFile = file;
+        return this;
+    }
+    public final RestClientBuilder file(String filePath){
+        this.mFile = new File(filePath);
+        return this;
+    }
+
 
     //回调的处理
     public final RestClientBuilder success(ISuccess iSuccess){
@@ -108,6 +122,7 @@ public class RestClientBuilder {
                 mIError,
                 mRequestBody,
                 mLoaderStyle,
+                mFile,
                 mContext
         );
     }

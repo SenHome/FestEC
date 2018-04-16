@@ -10,6 +10,7 @@ import com.starry.latte.net.callback.RequestCallback;
 import com.starry.latte.ui.LatteLoader;
 import com.starry.latte.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -41,7 +42,12 @@ public class RestClient {
     //请求体
     private final RequestBody BODY;
     private final LoaderStyle LOADER_STYLE;
+
+    private final File FILE;
+
     private final Context CONTEXT;
+
+
 
     //构造方法赋值
 
@@ -54,6 +60,7 @@ public class RestClient {
                       IError error,
                       RequestBody body,
                       LoaderStyle style,
+                      File file,
                       Context context) {
         this.URL = url;
         PARAMS.putAll(params);
@@ -63,6 +70,7 @@ public class RestClient {
         this.ERROR = error;
         this.BODY = body;
         this.LOADER_STYLE = style;
+        this.FILE = file;
         this.CONTEXT = context;
     }
 
@@ -107,7 +115,11 @@ public class RestClient {
                 break;
             case UPLODE:
                 //retrofit一些方法
-//                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()));
+                final RequestBody requestBody =
+                        RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()),FILE);
+                final MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("file ",FILE.getName(),requestBody);
+                call = RestCreater.getRestService().upload(URL,body);
                 break;
             default:
                 break;
