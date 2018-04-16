@@ -2,16 +2,14 @@ package com.starry.latte.ui;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;
-import android.support.v7.widget.ContentFrameLayout;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.starry.latte.R;
-import com.starry.latte.util.DimenUtil;
+import com.starry.latte.util.dimen.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 

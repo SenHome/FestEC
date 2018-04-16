@@ -1,4 +1,4 @@
-package com.starry.latte.util;
+package com.starry.latte.util.file;
 
 import android.content.ContentResolver;
 import android.content.Context;

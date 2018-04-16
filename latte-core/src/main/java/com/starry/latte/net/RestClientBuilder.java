@@ -37,6 +37,10 @@ public class RestClientBuilder {
 
     private File mFile = null;
 
+    private String mDownloadDir = null;
+    private String mExtension = null;
+    private String mName = null;
+
     //只允许同包的RestClient
     RestClientBuilder(){
 
@@ -59,11 +63,6 @@ public class RestClientBuilder {
         return this;
     }
 
-    //传入原始数据
-    public final RestClientBuilder raw(String raw){
-        this.mRequestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),raw);
-        return this;
-    }
 
     //上传文件
     public final RestClientBuilder file(File file){
@@ -74,6 +73,43 @@ public class RestClientBuilder {
         this.mFile = new File(filePath);
         return this;
     }
+
+
+    //loading
+    public final RestClientBuilder loader(Context context,LoaderStyle style){
+        this.mContext = context;
+        this.mLoaderStyle = style;
+        return this;
+    }
+    //使用默认指定loader
+    public final RestClientBuilder loader(Context context){
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
+        return this;
+    }
+
+
+    public final RestClientBuilder name(String name) {
+        this.mName = name;
+        return this;
+    }
+
+    public final RestClientBuilder dir(String dir) {
+        this.mDownloadDir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension) {
+        this.mExtension = extension;
+        return this;
+    }
+
+    //传入原始数据
+    public final RestClientBuilder raw(String raw){
+        this.mRequestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),raw);
+        return this;
+    }
+
 
 
     //回调的处理
@@ -98,24 +134,15 @@ public class RestClientBuilder {
     }
 
 
-    //loading
-    public final RestClientBuilder loader(Context context,LoaderStyle style){
-        this.mContext = context;
-        this.mLoaderStyle = style;
-        return this;
-    }
-    //使用默认指定loader
-    public final RestClientBuilder loader(Context context){
-        this.mContext = context;
-        this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
-        return this;
-    }
 
     //buildRestClient
     public final RestClient build(){
         return new RestClient(
                 mUrl,
                 PARAMS,
+                mDownloadDir,
+                mExtension,
+                mName,
                 mIRequest,
                 mISuccess,
                 mIFailure,

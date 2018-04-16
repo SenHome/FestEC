@@ -7,6 +7,7 @@ import com.starry.latte.net.callback.IFailure;
 import com.starry.latte.net.callback.IRequest;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.net.callback.RequestCallback;
+import com.starry.latte.net.download.DownloadHandler;
 import com.starry.latte.ui.LatteLoader;
 import com.starry.latte.ui.LoaderStyle;
 
@@ -35,6 +36,10 @@ public class RestClient {
     //参数
     private static final WeakHashMap<String,Object> PARAMS = RestCreater.getParams();
 
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
+
     private final IRequest REQUEST;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
@@ -54,6 +59,9 @@ public class RestClient {
 
     public RestClient(String url,
                       Map<String, Object> params,
+                      String downloadDir,
+                      String extension,
+                      String name,
                       IRequest request,
                       ISuccess success,
                       IFailure failure,
@@ -64,6 +72,9 @@ public class RestClient {
                       Context context) {
         this.URL = url;
         PARAMS.putAll(params);
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.REQUEST = request;
         this.SUCCESS = success;
         this.FAILURE = failure;
@@ -111,7 +122,6 @@ public class RestClient {
                 break;
             case DELETE:
                 call = service.get(URL,PARAMS);
-
                 break;
             case UPLODE:
                 //retrofit一些方法
@@ -177,5 +187,15 @@ public class RestClient {
 
     public final void delete(){
         request(HttpMethod.DELETE);
+    }
+
+    public final void upload() {
+        request(HttpMethod.UPLODE);
+    }
+
+    public final void download() {
+        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
+                SUCCESS, FAILURE, ERROR)
+                .handleDownload();
     }
 }

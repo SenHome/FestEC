@@ -2,7 +2,7 @@ package com.starry.latte.interceptors;
 
 import android.support.annotation.RawRes;
 
-import com.starry.latte.util.FileUtil;
+import com.starry.latte.util.file.FileUtil;
 
 import java.io.IOException;
 
