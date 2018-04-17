@@ -2,6 +2,7 @@ package com.starry.latte.ec.launcher;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.ScrollingTabContainerView;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -10,6 +11,8 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ui.launcher.LauncherHolderCreator;
+import com.starry.latte.ui.launcher.ScrollLauncherTag;
+import com.starry.latte.util.storage.LattePreference;
 
 import java.util.ArrayList;
 
@@ -54,6 +57,10 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
 
     @Override
     public void onItemClick(int position) {
-
+        //如果点击的是最后的一个轮播图
+        if (position == INTEGERS.size() -1){
+            LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(),true);
+            //检查用户是否已经登陆了
+        }
     }
 }
