@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import com.starry.latte.activity.ProxyActivity;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.launcher.LauncherDelegate;
+import com.starry.latte.ec.sign.SignUpDelegate;
+import com.starry.latte.ec.sign.SingInDelegate;
+
 import android.support.v7.app.ActionBar;
 
 
@@ -26,6 +29,6 @@ public class ExampleActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new SingInDelegate();
     }
 }
