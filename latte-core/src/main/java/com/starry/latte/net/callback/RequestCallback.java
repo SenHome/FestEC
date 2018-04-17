@@ -2,8 +2,8 @@ package com.starry.latte.net.callback;
 
 import android.os.Handler;
 
-import com.starry.latte.ui.LatteLoader;
-import com.starry.latte.ui.LoaderStyle;
+import com.starry.latte.ui.loader.LatteLoader;
+import com.starry.latte.ui.loader.LoaderStyle;
 
 
 import retrofit2.Call;

@@ -6,10 +6,9 @@ import com.starry.latte.net.callback.IError;
 import com.starry.latte.net.callback.IFailure;
 import com.starry.latte.net.callback.IRequest;
 import com.starry.latte.net.callback.ISuccess;
-import com.starry.latte.ui.LoaderStyle;
+import com.starry.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
