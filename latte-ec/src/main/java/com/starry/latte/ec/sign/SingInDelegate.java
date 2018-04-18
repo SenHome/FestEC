@@ -1,14 +1,23 @@
 package com.starry.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Patterns;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.starry.latte.app.AccountManager;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.ec.database.DatabaseManager;
+import com.starry.latte.ec.database.UserProfile;
+import com.starry.latte.net.RestClient;
+import com.starry.latte.net.callback.ISuccess;
+import com.starry.latte.util.log.LatteLogger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +35,37 @@ public class SingInDelegate extends LatteDelegate {
     @BindView(R2.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
+
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
+
+    @OnClick(R2.id.btn_sign_in)
+    void onClickSignIn(){
+        if (checkForm()) {
+            RestClient.builder()
+                    .url("http://192.168.0.127/RestServer/data/user_profile.json")
+                    .params("email", mEmail.getText().toString())
+                    .params("password", mPassword.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSucess(String response) {
+                            LatteLogger.json("USER_PROFILE", response);
+                            SignHandler.onSignIn(response, mISignListener);
+                        }
+                    })
+                    .build()
+                    .post();
+        }
+    }
+
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
 
@@ -34,6 +74,7 @@ public class SingInDelegate extends LatteDelegate {
     void onClickLink(){
         start(new SignUpDelegate());
     }
+
 
 
 
