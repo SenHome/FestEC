@@ -8,7 +8,6 @@ import com.starry.latte.activity.ProxyActivity;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.launcher.LauncherDelegate;
 import com.starry.latte.ec.sign.ISignListener;
-import com.starry.latte.ec.sign.SignUpDelegate;
 import com.starry.latte.ec.sign.SingInDelegate;
 import com.starry.latte.ui.launcher.ILauncherListener;
 import com.starry.latte.ui.launcher.OnLauncherFinishTag;
