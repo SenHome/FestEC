@@ -18,6 +18,8 @@ import com.starry.latte.ec.database.UserProfile;
 import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.util.log.LatteLogger;
+import com.starry.latte.wechat.LatterWeChat;
+import com.starry.latte.wechat.callbacks.IWeChatSignInCallback;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,6 +70,13 @@ public class SingInDelegate extends LatteDelegate {
 
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
+        //点击微信图片调用
+        LatterWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+
+            }
+        }).signIn();
 
     }
     @OnClick(R2.id.tv_link_sign_up)

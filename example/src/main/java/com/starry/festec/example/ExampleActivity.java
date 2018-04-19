@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.starry.latte.activity.ProxyActivity;
+import com.starry.latte.app.Latte;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.launcher.LauncherDelegate;
 import com.starry.latte.ec.sign.ISignListener;
@@ -27,6 +28,9 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        //初始化微信Activity
+        Latte.getConfigurator().withActivity(this);
     }
 
 
