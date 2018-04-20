@@ -42,7 +42,7 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener {
                 .success(new ISuccess() {
                     @Override
                     public void onSucess(String response) {
-                        Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .build()

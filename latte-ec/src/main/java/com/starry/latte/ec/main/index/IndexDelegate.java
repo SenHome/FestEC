@@ -8,12 +8,19 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.net.RestClient;
+import com.starry.latte.net.callback.ISuccess;
+import com.starry.latte.ui.recycler.MultipleFields;
+import com.starry.latte.ui.recycler.MultipleItemEntity;
 import com.starry.latte.ui.refresh.RefreshHandler;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -41,6 +48,20 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = new RefreshHandler(mRefreshLayout);
+        RestClient.builder()
+                .url("index_data.json")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSucess(String response) {
+                        final IndexDataConverter converter = new IndexDataConverter();
+                        converter.setJsonData(response);
+                        final ArrayList<MultipleItemEntity> list = converter.convert();
+                        final String image = list.get(1).getFiled(MultipleFields.IMAGE_URL);
+                        Toast.makeText(getContext(), image, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build()
+                .get();
     }
 
     private void initRefreshLayout(){
