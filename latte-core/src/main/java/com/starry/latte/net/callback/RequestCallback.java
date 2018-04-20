@@ -2,6 +2,9 @@ package com.starry.latte.net.callback;
 
 import android.os.Handler;
 
+import com.starry.latte.app.ConfigKeys;
+import com.starry.latte.app.Latte;
+import com.starry.latte.net.RestCreater;
 import com.starry.latte.ui.loader.LatteLoader;
 import com.starry.latte.ui.loader.LoaderStyle;
 
@@ -22,8 +25,10 @@ public class RequestCallback implements Callback<String>{
     private final IError ERROR;
     private final LoaderStyle LOADER_STYLE;
 
+
     //添加延时，看的更清楚
-    private static final Handler HANDLER = new Handler();
+    private static final Handler HANDLER = Latte.getHandler();
+
 
     public RequestCallback(
             IRequest request,
@@ -69,6 +74,20 @@ public class RequestCallback implements Callback<String>{
         }
         //停止
         stopLoading();
+//        onRequestFinish();
+    }
+
+    private void onRequestFinish() {
+        final long delayed = Latte.getConfiguration(ConfigKeys.LOADER_DELAYED);
+        if (LOADER_STYLE != null) {
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    RestCreater.getParams().clear();
+                    LatteLoader.stopLoading();
+                }
+            }, delayed);
+        }
     }
 
     private void stopLoading(){

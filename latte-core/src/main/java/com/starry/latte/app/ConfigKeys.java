@@ -10,6 +10,7 @@ public enum ConfigKeys {
     APPLICATION_CONTEXT,
     CONFIG_READY,
     ICON,
+    HANDLER,
     LOADER_DELAYED,
     INTERCEPTOR,
     WE_CHAT_APP_ID,

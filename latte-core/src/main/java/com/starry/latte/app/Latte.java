@@ -1,6 +1,7 @@
 package com.starry.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -30,6 +31,10 @@ public final class Latte {
 
     public static Configurator getConfigurator(){
         return Configurator.getInstance();
+    }
+
+    public static Handler getHandler(){
+        return getConfiguration(ConfigKeys.HANDLER);
     }
 
 }
