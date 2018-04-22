@@ -16,6 +16,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.ec.main.EcBottomDelegate;
 import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.recycler.BaseDecoration;
@@ -86,6 +87,10 @@ public class IndexDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
 
+        //点击Item时候，fragent和BottomBar一块都要隐藏
+        //得到父级元素，容器Delegate(fragment)
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
     }
 
     @Override

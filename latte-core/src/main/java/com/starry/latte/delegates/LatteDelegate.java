@@ -6,4 +6,10 @@ package com.starry.latte.delegates;
  */
 
 public abstract class LatteDelegate  extends PermissionCheckerDelegate{
+
+    //fragment和Bottombar都隐藏掉功能添加的代码
+    @SuppressWarnings("unused")
+    public <T extends LatteDelegate> T getParentDelegate(){
+        return (T) getParentFragment();
+    }
 }
