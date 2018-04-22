@@ -2,6 +2,7 @@ package com.starry.latte.ec.main.index;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,7 @@ import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
 import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
+import com.starry.latte.ui.recycler.BaseDecoration;
 import com.starry.latte.ui.recycler.MultipleFields;
 import com.starry.latte.ui.recycler.MultipleItemEntity;
 import com.starry.latte.ui.refresh.RefreshHandler;
@@ -50,6 +52,7 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
+        //测试使用获取index_data数据
 //        RestClient
 //                .builder()
 //                .url("http://192.168.0.127/RestServer/data/index_data.json")
@@ -81,6 +84,8 @@ public class IndexDelegate extends BottomItemDelegate {
     private void initRecyclerView(){
         final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
+        
     }
 
     @Override
