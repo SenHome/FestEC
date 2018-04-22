@@ -17,6 +17,8 @@ import com.starry.latte.ui.launcher.OnLauncherFinishTag;
 import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
+import qiu.niorgai.StatusBarCompat;
+
 
 public class ExampleActivity extends ProxyActivity implements ISignListener, ILauncherListener {
 
@@ -32,6 +34,9 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
         //初始化微信Activity
         Latte.getConfigurator().withActivity(this);
+        //沉浸式状态栏
+        StatusBarCompat.translucentStatusBar(this,true);
+
     }
 
 

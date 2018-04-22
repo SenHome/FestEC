@@ -85,7 +85,7 @@ public class IndexDelegate extends BottomItemDelegate {
         final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
-        
+
     }
 
     @Override
