@@ -1,12 +1,13 @@
 package com.starry.latte.ec.main.index;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.recycler.MultipleFields;
 import com.starry.latte.ui.recycler.MultipleItemEntity;
 import com.starry.latte.ui.refresh.RefreshHandler;
+import com.starry.latte.util.log.LatteLogger;
 
 import java.util.ArrayList;
 
@@ -47,21 +49,23 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        RestClient.builder()
-                .url("index_data.json")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSucess(String response) {
-                        final IndexDataConverter converter = new IndexDataConverter();
-                        converter.setJsonData(response);
-                        final ArrayList<MultipleItemEntity> list = converter.convert();
-                        final String image = list.get(1).getFiled(MultipleFields.IMAGE_URL);
-                        Toast.makeText(getContext(), image, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build()
-                .get();
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
+//        RestClient
+//                .builder()
+//                .url("http://192.168.0.127/RestServer/data/index_data.json")
+//                .success(new ISuccess() {
+//                    @Override
+//                    public void onSucess(String response) {
+//                        final IndexDataConverter converter = new IndexDataConverter();
+//                        converter.setJsonData(response);
+//                        String jsonData = converter.getJsonData();
+//                        ArrayList<MultipleItemEntity> list = converter.convert();
+//                        final String image = list.get(1).getField(MultipleFields.IMAGE_URL);
+//                        Toast.makeText(getContext(), jsonData, Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .build()
+//                .get();
     }
 
     private void initRefreshLayout(){
@@ -73,10 +77,17 @@ public class IndexDelegate extends BottomItemDelegate {
         mRefreshLayout.setProgressViewOffset(true,120,300);
     }
 
+
+    private void initRecyclerView(){
+        final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
+        mRecyclerView.setLayoutManager(manager);
+    }
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerView();
         mRefreshHandler.firstPage("index_data.json");
     }
 

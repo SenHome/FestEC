@@ -28,17 +28,20 @@ public class ExampleApp extends Application {
                 .withWeChatAppSecret("")
                 .configure();
 
-//        initStetho();
+//          .withApiHost("http://192.168.0.127/RestServer/data/")
+        // .withInterceptor(new DebugInterceptor("index", R.raw.text))
+
+        initStetho();
         //初始化数据库
         DatabaseManager.getInstance().init(this);
 
     }
 
-//    private void initStetho() {
-//        Stetho.initialize(
-//                Stetho.newInitializerBuilder(this)
-//                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-//                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-//                        .build());
-//    }
+    private void initStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+    }
 }

@@ -31,18 +31,19 @@ public final class RestCreater {
 
     private static final class OkhttpHolder{
         private static final int TIME_OUT = 60;
-        private static final ArrayList<Interceptor> INTERCEPTORS = Latte.getConfiguration(ConfigKeys.INTERCEPTOR);
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        private static final ArrayList<Interceptor> INTERCEPTORS = Latte.getConfiguration(ConfigKeys.INTERCEPTOR);
 
-        private static OkHttpClient.Builder addInterceptor(){
-            if(INTERCEPTORS != null && !INTERCEPTORS.isEmpty()){
-                for (Interceptor interceptor:INTERCEPTORS) {
-                    BUILDER.addInterceptor(interceptor);
-                }
-            }
-            return BUILDER;
-        }
-        private static final OkHttpClient OK_HTTP_CLIENT =addInterceptor()
+        //注释掉拦截器就误用了
+//        private static OkHttpClient.Builder addInterceptor(){
+//            if(INTERCEPTORS != null && !INTERCEPTORS.isEmpty()){
+//                for (Interceptor interceptor:INTERCEPTORS) {
+//                    BUILDER.addInterceptor(interceptor);
+//                }
+//            }
+//            return BUILDER;
+//        }
+        private static final OkHttpClient OK_HTTP_CLIENT = BUILDER
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();
     }

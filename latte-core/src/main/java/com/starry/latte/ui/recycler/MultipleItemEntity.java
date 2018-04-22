@@ -12,40 +12,36 @@ import java.util.LinkedHashMap;
 
 public class MultipleItemEntity implements MultiItemEntity {
 
-    //数据转换
-    private final ReferenceQueue<LinkedHashMap<Object,Object>> ITEM_QUENE = new ReferenceQueue<>();
-    private final LinkedHashMap<Object,Object> MULTIPLE_FILEDS = new LinkedHashMap<>();
-    private final SoftReference<LinkedHashMap<Object,Object>> FILEDS_REFERENCE =
-            new SoftReference<>(MULTIPLE_FILEDS,ITEM_QUENE);
 
+    private final ReferenceQueue<LinkedHashMap<Object, Object>> ITEM_QUEUE = new ReferenceQueue<>();
+    private final LinkedHashMap<Object, Object> MULTIPLE_FIELDS = new LinkedHashMap<>();
+    private final SoftReference<LinkedHashMap<Object, Object>> FIELDS_REFERENCE =
+            new SoftReference<>(MULTIPLE_FIELDS, ITEM_QUEUE);
 
-    MultipleItemEntity(LinkedHashMap<Object,Object> fileds){
-        FILEDS_REFERENCE.get().putAll(fileds);
+    MultipleItemEntity(LinkedHashMap<Object, Object> fields) {
+        FIELDS_REFERENCE.get().putAll(fields);
     }
 
-
-    //创建一个builder
     public static MultipleEntityBuilder builder(){
         return new MultipleEntityBuilder();
     }
 
-    //获取数据，三个方法
     @Override
     public int getItemType() {
-        return (int) FILEDS_REFERENCE.get().get(MultipleFields.ITEM_TYPE);
+        return (int) FIELDS_REFERENCE.get().get(MultipleFields.ITEM_TYPE);
     }
 
-    public final <T> T getFiled(Object key){
-        return (T) FILEDS_REFERENCE.get().get(key);
+    @SuppressWarnings("unchecked")
+    public final <T> T getField(Object key){
+        return (T) FIELDS_REFERENCE.get().get(key);
     }
 
-    public final LinkedHashMap<?,?> getFileds(){
-        return FILEDS_REFERENCE.get();
+    public final LinkedHashMap<?,?> getFields(){
+        return FIELDS_REFERENCE.get();
     }
 
-    //set方法插入数据
-    public final MultiItemEntity setFiled(Object key,Object value){
-        FILEDS_REFERENCE.get().put(key,value);
+    public final MultipleItemEntity setField(Object key,Object value){
+        FIELDS_REFERENCE.get().put(key,value);
         return this;
     }
 }
