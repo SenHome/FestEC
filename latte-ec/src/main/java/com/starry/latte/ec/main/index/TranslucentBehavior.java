@@ -49,6 +49,8 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
 
     @Override
     public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull Toolbar child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
+        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
+
         //增加滑动距离
         mDistanceY +=dy;
         //toolbar的高度
@@ -64,5 +66,6 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
             child.setBackgroundColor(Color.rgb(RGB_VALUE.red(),RGB_VALUE.green(),RGB_VALUE.blue()));
 
         }
+
     }
 }
