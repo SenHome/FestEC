@@ -11,6 +11,7 @@ import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.recycler.DataConverter;
 import com.starry.latte.ui.recycler.MultipleRecyclerAdapter;
+import com.starry.latte.util.log.LatteLogger;
 
 
 /**
@@ -73,7 +74,6 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,
                 .success(new ISuccess() {
                     @Override
                     public void onSucess(String response) {
-//                        Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
                         final JSONObject object = JSON.parseObject(response);
                         BEAN.setTotal(object.getInteger("total"))
                                 .setPageSize(object.getInteger("page_size"));
@@ -89,36 +89,38 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,
                 .get();
     }
 
-//    private void paging(final String url){
-//        final int pageSize = BEAN.getPageSize();
-//        final int currentCount = BEAN.getCurrentCount();
-//        final int total = BEAN.getTotal();
-//        final int index = BEAN.getPageIndex();
-//
-//        if(mAdapter.getData().size() < pageSize || currentCount >= total){
-//            mAdapter.loadMoreEnd(true);
-//        }else {
-//            Latte.getHandler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    RestClient.builder()
-//                            .url(url + index)
-//                            .success(new ISuccess() {
-//                                @Override
-//                                public void onSucess(String response) {
-////                                    LatteLogger.json("paging",response);
+    private void paging(final String url){
+        final int pageSize = BEAN.getPageSize();
+        final int currentCount = BEAN.getCurrentCount();
+        final int total = BEAN.getTotal();
+        final int index = BEAN.getPageIndex();
+
+        if(mAdapter.getData().size() < pageSize || currentCount >= total){
+            mAdapter.loadMoreEnd(true);
+        }else {
+            Latte.getHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    RestClient.builder()
+                            .url(url + index)
+                            .success(new ISuccess() {
+                                @Override
+                                public void onSucess(String response) {
+//                                    LatteLogger.json("paging",response);
 //                                    CONVERTER.clearData();
-//                                    mAdapter.addData(CONVERTER.setJsonData(response).convert());
-//                                    //累加数量
-//                                    BEAN.setCurrentCount(mAdapter.getData().size());
-//                                    mAdapter.loadMoreComplete();
-//                                    BEAN.addIndex();
-//                                }
-//                            })
-//                }
-//            },1000);
-//        }
-//    }
+                                    mAdapter.addData(CONVERTER.setJsonData(response).convert());
+                                    //累加数量
+                                    BEAN.setCurrentCount(mAdapter.getData().size());
+                                    mAdapter.loadMoreComplete();
+                                    BEAN.addIndex();
+                                }
+                            })
+                            .build()
+                            .get();
+                }
+            },1000);
+        }
+    }
 
     @Override
     public void onRefresh() {
@@ -127,6 +129,6 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,
 
     @Override
     public void onLoadMoreRequested() {
-//        paging("refresh.json?index=");
+        paging("refresh.php?index=");
     }
 }

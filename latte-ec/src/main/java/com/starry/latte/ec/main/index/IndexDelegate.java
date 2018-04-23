@@ -98,7 +98,7 @@ public class IndexDelegate extends BottomItemDelegate {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler.firstPage("index_data.json");
+        mRefreshHandler.firstPage("index.php");
     }
 
     @Override
