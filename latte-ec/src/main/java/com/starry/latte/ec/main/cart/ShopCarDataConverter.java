@@ -41,6 +41,7 @@ public class ShopCarDataConverter extends DataConverter {
                     .setFiled(ShopCarItemFiles.DESC,desc)
                     .setFiled(ShopCarItemFiles.PRICE,price)
                     .setFiled(ShopCarItemFiles.TITLE,title)
+                    .setFiled(ShopCarItemFiles.IS_SELECTED,false)
                     .build();
 
             dataList.add(entity);

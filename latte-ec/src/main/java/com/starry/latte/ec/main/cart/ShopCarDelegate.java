@@ -1,11 +1,14 @@
 package com.starry.latte.ec.main.cart;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.joanzapata.iconify.widget.IconTextView;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
@@ -16,6 +19,7 @@ import com.starry.latte.ui.recycler.MultipleItemEntity;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/24.
@@ -25,8 +29,28 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess {
 
     @BindView(R2.id.rv_shop_cart)
     RecyclerView mRecyclerView = null;
+    @BindView(R2.id.icon_shop_cart_select_all)
+    IconTextView mIconSelecAll = null;
+
+    @OnClick(R2.id.icon_shop_cart_select_all)
+    void onClickSelectAll(){
+        final int tag = (int) mIconSelecAll.getTag();
+        if(tag == 0){
+            mIconSelecAll.setTextColor(ContextCompat.getColor(getContext(),R.color.app_main));
+            mIconSelecAll.setTag(1);
+            mAdapter.setIsSelectedAll(true);
+            mAdapter.notifyItemRangeChanged(0,mAdapter.getItemCount());
+
+        }else {
+            mIconSelecAll.setTextColor(Color.GRAY);
+            mIconSelecAll.setTag(0);
+            mAdapter.setIsSelectedAll(false);
+            mAdapter.notifyItemRangeChanged(0,mAdapter.getItemCount());
+        }
+    }
 
     private ShopCarAdapter mAdapter = null;
+
 
     @Override
     public Object setLayout() {
@@ -36,6 +60,7 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         super.onBindView(savedInstanceState, rootView);
+        mIconSelecAll.setTag(0);
 
     }
 

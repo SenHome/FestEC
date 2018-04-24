@@ -59,7 +59,8 @@
         android:id="@+id/rv_shop_cart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8" />
+        android:layout_weight="8"
+        android:overScrollMode="never"/>
 
     <!--没有Item时候，用一个东西代替，填充替代-->
     <android.support.v7.widget.ViewStubCompat
