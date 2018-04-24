@@ -10,5 +10,6 @@ public enum  ShopCarItemFiles {
     DESC,
     COUNT,
     PRICE,
-    IS_SELECTED
+    IS_SELECTED,
+    POSITION
 }
