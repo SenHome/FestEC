@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
@@ -13,6 +14,7 @@ import com.starry.latte.ec.main.personal.list.ListAdapter;
 import com.starry.latte.ec.main.personal.list.ListBean;
 import com.starry.latte.ec.main.personal.list.ListItemType;
 import com.starry.latte.ec.main.personal.order.OrderListDelegate;
+import com.starry.latte.ec.main.personal.profile.UserProfileDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,11 @@ public class PersonalDelegate extends BottomItemDelegate {
     void onClickAllOrder(){
         mArgs.putString(ORDER_TYPE,"all");
         startOrderListByType();
+    }
+
+    @OnClick(R2.id.img_user_avatar)
+    void onClickAvatar(){
+        getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
     }
 
 
