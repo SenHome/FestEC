@@ -19,6 +19,7 @@ import java.util.List;
 
 import me.yokeyword.fragmentation.SupportHelper;
 
+
 /**
  * Created by wangsen on 2018/4/22.
  */
@@ -99,11 +100,11 @@ public class SortRecyclerViewAdapter extends MultipleRecyclerAdapter{
 
     private void switchContent(ContentDelegate delegate){
         final LatteDelegate contentDelegate =
-//                SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
-                DELEGATE.findChildFragment(ContentDelegate.class);
+                SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
+//                DELEGATE.findChildFragment(ContentDelegate.class);
         if(contentDelegate!= null){
-            contentDelegate.replaceFragment(delegate,false);
-//            contentDelegate.getSupportDelegate().replaceFragment(delegate,false);
+//            contentDelegate.replaceFragment(delegate,false);
+            contentDelegate.getSupportDelegate().replaceFragment(delegate,false);
         }
     }
 }

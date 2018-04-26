@@ -118,4 +118,6 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
             }
         });
     }
+
+
 }

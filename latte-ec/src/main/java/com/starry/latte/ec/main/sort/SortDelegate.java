@@ -26,6 +26,8 @@ public class SortDelegate extends BottomItemDelegate {
         super.onBindView(savedInstanceState, rootView);
     }
 
+
+
     //懒加载
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {

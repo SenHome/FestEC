@@ -31,8 +31,6 @@ public class ExampleApp extends Application {
                 .withWebEvent("test",new TestEvent())
                 .configure();
 
-//          .withApiHost("http://192.168.0.127/RestServer/data/")
-        // .withInterceptor(new DebugInterceptor("index", R.raw.text))
 
         initStetho();
         //初始化数据库

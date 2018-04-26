@@ -12,17 +12,23 @@ import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.joanzapata.iconify.widget.IconTextView;
+import com.starry.latte.delegates.IPageLoadListener;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.ec.pay.FastPay;
+import com.starry.latte.ec.pay.IAIPayResultListener;
 import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.loader.LatteLoader;
 import com.starry.latte.ui.recycler.MultipleItemEntity;
+import com.starry.latte.util.log.LatteLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,7 +37,7 @@ import butterknife.OnClick;
  * Created by wangsen on 2018/4/24.
  */
 
-public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener {
+public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener,IAIPayResultListener{
 
     private ShopCarAdapter mAdapter = null;
     //购物车数量标记
@@ -70,58 +76,6 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
 
     @OnClick(R2.id.tv_top_shop_cart_remove_selected)
     void onClickRemoveSeletedItem(){
-//        final List<MultipleItemEntity> data = mAdapter.getData();
-//        //要删除的数据
-//        final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
-//        for(MultipleItemEntity entity : data){
-//            final boolean isSelected = entity.getField(ShopCarItemFiles.IS_SELECTED);
-//            if(isSelected){
-//                deleteEntities.add(entity);
-//            }
-//        }
-//        //循环选择删除的
-//        for(MultipleItemEntity entity : deleteEntities){
-//            int removePosition;
-//            //item的position
-//            final int entityPosition = entity.getField(ShopCarItemFiles.POSITION);
-//            if(entityPosition > mCurrentCount - 1){
-//                removePosition = entityPosition - (mTotalCount - mCurrentCount);
-//            }else {
-//                removePosition = entityPosition;
-//            }
-//
-//            if(removePosition <= mAdapter.getItemCount()){
-//                mAdapter.remove(removePosition);
-//                mCurrentCount = mAdapter.getItemCount();
-//                //更新数据
-//                mAdapter.notifyItemRangeChanged(removePosition,mAdapter.getItemCount());
-//            }
-//
-//
-//        }
-
-//        //============================================
-//        final List<MultipleItemEntity> data = mAdapter.getData();
-//        // 要删除的数据
-//        final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
-//        int i = 0;
-//        for (MultipleItemEntity entity : data){
-//            final boolean isSelected = entity.getField(ShopCarItemFiles.IS_SELECTED);
-//            entity.setField(ShopCarItemFiles.POSITION, i);
-//            if (isSelected){
-//                deleteEntities.add(entity);
-//            }
-//            i++;
-//        }
-//        for (MultipleItemEntity entity : deleteEntities){
-//            final int removePosition = entity.getField(ShopCarItemFiles.POSITION);
-//            if (removePosition <= mAdapter.getItemCount()) {
-//                mAdapter.remove(removePosition);
-//                //更新数据
-//                mAdapter.notifyItemRangeChanged(removePosition, mAdapter.getItemCount());
-//            }
-//        }
-
         final List<MultipleItemEntity> data = mAdapter.getData();
         //要删除的数据
         final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
@@ -155,6 +109,43 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
 
     }
 
+    @OnClick(R2.id.tv_shop_cart_pay)
+    void onClickPay(){
+        FastPay.create(this).beginPayDialog();
+//        createOrder();
+    }
+
+    //创建订单，和支付是没有关系的
+    private void createOrder(){
+        final String orderUrl = "你的生成订单的API";
+        final WeakHashMap<String,Object> orderParams = new WeakHashMap<>();
+        orderParams.put("userid","dfdf");
+        orderParams.put("amount",0.01);
+        orderParams.put("comment","测试支付");
+        orderParams.put("type",1);
+        RestClient.builder()
+                .url(orderUrl)
+                .loader(getContext())
+                .params(orderParams)
+                .success(new ISuccess() {
+                    @Override
+                    public void onSucess(String response) {
+                        //进行支付过程
+                        LatteLogger.d("ORDER",response);
+
+                        final int orderId = JSON.parseObject(response).getInteger("result");
+
+                        FastPay.create(ShopCarDelegate.this)
+                                .setPayResultListener(ShopCarDelegate.this)
+                                .setOrderId(orderId)
+                                .beginPayDialog();
+
+
+                    }
+                })
+                .build()
+                .post();
+    }
 
     @SuppressWarnings("RestrictedApi")
     private void checkItemCount() {
@@ -220,5 +211,31 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
     public void onItemClick(double itemTotalPrice) {
         final double price = mAdapter.getTotalPrice();
         mTvTotalPrice.setText(String.valueOf(price));
+    }
+
+
+    @Override
+    public void onPaySuccess() {
+
+    }
+
+    @Override
+    public void onPaying() {
+
+    }
+
+    @Override
+    public void onPayFail() {
+
+    }
+
+    @Override
+    public void onPayCancel() {
+
+    }
+
+    @Override
+    public void onPayConnectError() {
+
     }
 }

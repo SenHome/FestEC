@@ -11,7 +11,6 @@ import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
 import com.starry.latte.ui.recycler.DataConverter;
 import com.starry.latte.ui.recycler.MultipleRecyclerAdapter;
-import com.starry.latte.util.log.LatteLogger;
 
 
 /**

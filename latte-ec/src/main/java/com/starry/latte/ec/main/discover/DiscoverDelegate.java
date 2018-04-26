@@ -34,7 +34,7 @@ public class DiscoverDelegate extends BottomItemDelegate {
         //WebDelegateImpl，WebDelegate的实现类
         final WebDelegateImpl delegate = WebDelegateImpl.create("index.html");
         delegate.setTopDelegate(this.getParentDelegate());
-        loadRootFragment(R.id.web_discovery_container,delegate);
+        getSupportDelegate().loadRootFragment(R.id.web_discovery_container,delegate);
     }
 
     @Override

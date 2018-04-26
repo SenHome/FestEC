@@ -111,18 +111,22 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        final int tag = (int) v.getTag();
+    public void changeColor(int tabIndex) {
         resetColor();
-        final RelativeLayout item = (RelativeLayout) v;
+        final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(tabIndex);
         final IconTextView itemIcon = (IconTextView) item.getChildAt(0);
         itemIcon.setTextColor(mClickedColor);
         final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
         itemTitle.setTextColor(mClickedColor);
-        showHideFragment(ITEM_DELEGATE.get(tag),ITEM_DELEGATE.get(mCurrentDelegate));
+    }
+
+    @Override
+    public void onClick(View v) {
+        final int tabIndex = (int) v.getTag();
+        changeColor(tabIndex);
+        getSupportDelegate().showHideFragment(ITEM_DELEGATE.get(tabIndex),ITEM_DELEGATE.get(mCurrentDelegate));
 
         //注意先后顺序
-        mCurrentDelegate = tag;
+        mCurrentDelegate = tabIndex;
     }
 }

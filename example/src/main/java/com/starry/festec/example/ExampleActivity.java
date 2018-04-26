@@ -42,7 +42,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override
@@ -60,15 +60,17 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-                Toast.makeText(this, "启动结束，用户登陆了", Toast.LENGTH_SHORT).show();
-                startWithPop(new EcBottomDelegate());
+//                Toast.makeText(this, "启动结束，用户登陆了", Toast.LENGTH_SHORT).show();
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this, "启动结束，用户没登陆了", Toast.LENGTH_SHORT).show();
-                startWithPop(new SingInDelegate());
+//                Toast.makeText(this, "启动结束，用户没登陆了", Toast.LENGTH_SHORT).show();
+                getSupportDelegate().startWithPop(new SingInDelegate());
                 break;
             default:
                 break;
         }
     }
+
+
 }
