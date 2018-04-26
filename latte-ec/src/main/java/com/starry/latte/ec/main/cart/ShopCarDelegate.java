@@ -18,6 +18,7 @@ import com.starry.latte.delegates.IPageLoadListener;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.ec.main.EcBottomDelegate;
 import com.starry.latte.ec.pay.FastPay;
 import com.starry.latte.ec.pay.IAIPayResultListener;
 import com.starry.latte.net.RestClient;
@@ -111,8 +112,8 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
 
     @OnClick(R2.id.tv_shop_cart_pay)
     void onClickPay(){
-        FastPay.create(this).beginPayDialog();
-//        createOrder();
+//        FastPay.create(this).beginPayDialog();
+        createOrder();
     }
 
     //创建订单，和支付是没有关系的
@@ -157,6 +158,13 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getContext(), "你该购物啦！", Toast.LENGTH_SHORT).show();
+                    final int indexTab = 0;
+                    final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+                    final BottomItemDelegate indexDelegate = ecBottomDelegate.getItemDelegates().get(indexTab);
+                    ecBottomDelegate
+                            .getSupportDelegate()
+                            .showHideFragment(indexDelegate, ShopCarDelegate.this);
+                    ecBottomDelegate.changeColor(indexTab);
                 }
             });
             mRecyclerView.setVisibility(View.GONE);
@@ -238,4 +246,6 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
     public void onPayConnectError() {
 
     }
+
+
 }

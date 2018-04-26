@@ -40,6 +40,11 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     //抽象发发指定
     public abstract LinkedHashMap<BottomTabBean,BottomItemDelegate> setItems(ItemBuilder builder);
 
+
+    public ArrayList<BottomItemDelegate> getItemDelegates() {
+        return ITEM_DELEGATE;
+    }
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_bottom;

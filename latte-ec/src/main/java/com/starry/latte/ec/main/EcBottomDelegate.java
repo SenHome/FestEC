@@ -9,6 +9,7 @@ import com.starry.latte.delegates.bottom.ItemBuilder;
 import com.starry.latte.ec.main.cart.ShopCarDelegate;
 import com.starry.latte.ec.main.discover.DiscoverDelegate;
 import com.starry.latte.ec.main.index.IndexDelegate;
+import com.starry.latte.ec.main.personal.PersonalDelegate;
 import com.starry.latte.ec.main.sort.SortDelegate;
 
 import java.util.LinkedHashMap;
@@ -26,7 +27,7 @@ public class EcBottomDelegate extends BaseBottomDelegate {
         items.put(new BottomTabBean("{fa-sort}", "分类"), new SortDelegate());
         items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
         items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCarDelegate());
-        items.put(new BottomTabBean("{fa-user}", "我的"), new IndexDelegate());
+        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
         return builder.addItems(items).build();
     }
 
