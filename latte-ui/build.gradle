@@ -31,4 +31,6 @@ dependencies {
     //Google AutoValue，渐变式状态栏颜色，provided编译器件使用，打包时候废弃
     provided 'com.google.auto.value:auto-value:1.4.1'
     annotationProcessor "com.google.auto.value:auto-value:1.4.1"
+
+
 }

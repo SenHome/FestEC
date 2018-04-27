@@ -182,7 +182,7 @@ public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICa
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        super.onBindView(savedInstanceState, rootView);
+//        super.onBindView(savedInstanceState, rootView);
         mIconSelecAll.setTag(0);
 
     }

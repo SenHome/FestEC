@@ -29,7 +29,7 @@ public class GoodsDetailDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        super.onBindView(savedInstanceState, rootView);
+//        super.onBindView(savedInstanceState, rootView);
     }
 
     //点击进入水平动画

@@ -20,6 +20,6 @@ public class NameDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        super.onBindView(savedInstanceState, rootView);
+//        super.onBindView(savedInstanceState, rootView);
     }
 }

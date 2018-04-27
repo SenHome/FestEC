@@ -23,7 +23,7 @@ public class DiscoverDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        super.onBindView(savedInstanceState, rootView);
+//        super.onBindView(savedInstanceState, rootView);
     }
 
     //塞进WebView
