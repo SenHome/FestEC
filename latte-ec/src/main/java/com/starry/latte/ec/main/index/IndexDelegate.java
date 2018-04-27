@@ -31,6 +31,7 @@ import butterknife.BindView;
 
 /**
  * Created by wangsen on 2018/4/19.
+ * 主页界面
  */
 
 public class IndexDelegate extends BottomItemDelegate {

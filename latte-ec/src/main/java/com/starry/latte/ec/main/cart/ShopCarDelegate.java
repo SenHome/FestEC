@@ -1,6 +1,5 @@
 package com.starry.latte.ec.main.cart;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.joanzapata.iconify.widget.IconTextView;
-import com.starry.latte.delegates.IPageLoadListener;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
@@ -23,7 +21,6 @@ import com.starry.latte.ec.pay.FastPay;
 import com.starry.latte.ec.pay.IAIPayResultListener;
 import com.starry.latte.net.RestClient;
 import com.starry.latte.net.callback.ISuccess;
-import com.starry.latte.ui.loader.LatteLoader;
 import com.starry.latte.ui.recycler.MultipleItemEntity;
 import com.starry.latte.util.log.LatteLogger;
 
@@ -36,6 +33,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/24.
+ * 购物车界面
  */
 
 public class ShopCarDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener,IAIPayResultListener{

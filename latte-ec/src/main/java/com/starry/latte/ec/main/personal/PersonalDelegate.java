@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.starry.latte.delegates.bottom.BottomItemDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
+import com.starry.latte.ec.main.personal.address.AddressDelegate;
 import com.starry.latte.ec.main.personal.list.ListAdapter;
 import com.starry.latte.ec.main.personal.list.ListBean;
 import com.starry.latte.ec.main.personal.list.ListItemType;
@@ -24,6 +25,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/26.
+ * 个人信息界面
  */
 
 public class PersonalDelegate extends BottomItemDelegate {
@@ -72,6 +74,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         ListBean address = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
+                .setDelegate(new AddressDelegate())
                 .setText("收获地址")
                 .build();
 
@@ -90,6 +93,9 @@ public class PersonalDelegate extends BottomItemDelegate {
        mRvSettings.setLayoutManager(manager);
        final ListAdapter adapter = new ListAdapter(data);
        mRvSettings.setAdapter(adapter);
+       //加入地址监听
+        mRvSettings.addOnItemTouchListener(new PersonOnClickListener(this));
+
 
     }
 }

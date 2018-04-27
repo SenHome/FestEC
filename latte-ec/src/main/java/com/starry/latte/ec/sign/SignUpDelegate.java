@@ -27,6 +27,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/17.
+ * 注册界面
  */
 
 public class SignUpDelegate extends LatteDelegate {

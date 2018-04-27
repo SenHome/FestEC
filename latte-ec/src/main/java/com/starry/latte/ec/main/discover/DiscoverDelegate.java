@@ -12,6 +12,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by wangsen on 2018/4/23.
+ * 发现界面
  */
 
 public class DiscoverDelegate extends BottomItemDelegate {

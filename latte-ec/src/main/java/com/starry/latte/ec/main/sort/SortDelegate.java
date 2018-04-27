@@ -11,6 +11,7 @@ import com.starry.latte.ec.main.sort.list.VerticalListDelegate;
 
 /**
  * Created by wangsen on 2018/4/20.
+ * 分类页面
  */
 
 public class SortDelegate extends BottomItemDelegate {

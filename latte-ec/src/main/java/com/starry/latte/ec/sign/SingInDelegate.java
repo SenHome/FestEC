@@ -26,6 +26,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/17.
+ * 登陆界面
  */
 
 public class SingInDelegate extends LatteDelegate {
