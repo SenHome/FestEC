@@ -24,6 +24,7 @@ import javax.lang.model.element.TypeElement;
 /**
  * Created by wangsen on 2018/4/18.
  */
+
 @SuppressWarnings("unused")
 @AutoService(Processor.class)
 public class LatteProcessor extends AbstractProcessor {

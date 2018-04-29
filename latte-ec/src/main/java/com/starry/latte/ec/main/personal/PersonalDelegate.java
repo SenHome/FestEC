@@ -16,6 +16,7 @@ import com.starry.latte.ec.main.personal.list.ListBean;
 import com.starry.latte.ec.main.personal.list.ListItemType;
 import com.starry.latte.ec.main.personal.order.OrderListDelegate;
 import com.starry.latte.ec.main.personal.profile.UserProfileDelegate;
+import com.starry.latte.ec.main.personal.settings.SettingsDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
+                .setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
 

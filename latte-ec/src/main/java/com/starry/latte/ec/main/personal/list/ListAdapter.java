@@ -1,5 +1,6 @@
 package com.starry.latte.ec.main.personal.list;
 
+import android.support.v7.widget.SwitchCompat;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,8 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean,BaseViewHold
 
         //添加头像的样式
         addItemType(ListItemType.ITEM_AVATAR,R.layout.arrow_item_avatar);
+        //添加消息推送样式
+        addItemType(ListItemType.ITEM_SWITCH,R.layout.arrow_switch_layout);
     }
 
     @Override
@@ -43,6 +46,12 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean,BaseViewHold
                         .load(item.getImageUrl())
                         .apply(OPTIONS)
                         .into((ImageView) helper.getView(R.id.img_arrow_avatar));
+                break;
+            case ListItemType.ITEM_SWITCH:
+                helper.setText(R.id.tv_arrow_switch_text,item.getText());
+                final SwitchCompat switchCompat =helper.getView(R.id.list_item_switch);
+                switchCompat.setChecked(true);
+                switchCompat.setOnCheckedChangeListener(item.getmOnCheckedChangeListener());
                 break;
             default:
                 break;

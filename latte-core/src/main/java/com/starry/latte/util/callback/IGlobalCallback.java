@@ -1,5 +1,7 @@
 package com.starry.latte.util.callback;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by wangsen on 2018/4/27.
  * 全局回调接口
@@ -8,5 +10,5 @@ package com.starry.latte.util.callback;
 
 public interface IGlobalCallback<T> {
 
-    void executeCallback(T args);
+    void executeCallback(@Nullable T args);
 }

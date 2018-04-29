@@ -46,7 +46,6 @@ public class AddressDelegate extends LatteDelegate implements ISuccess{
 
     @Override
     public void onSucess(String response) {
-        Log.d("AddressDele",response);
         LatteLogger.d("AddressDelegate",response);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);

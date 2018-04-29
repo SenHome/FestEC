@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.starry.latte">
 
     <!--网络权限-->
@@ -28,6 +29,8 @@
         android:allowBackup="true"
         android:label="Latte"
         android:supportsRtl="true"
+        tools:replace="android:label"
+
         >
 
         <!--图片剪裁Activity-->
@@ -35,6 +38,7 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-    </application>
+    </application
+>
 
 </manifest>

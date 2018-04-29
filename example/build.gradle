@@ -9,6 +9,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //推送
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "d0a10265f512c98ea9c3b18d", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+
     }
     buildTypes {
         release {
@@ -30,4 +43,8 @@ dependencies {
     implementation project(':latte-ec')
     compile 'com.facebook.stetho:stetho:1.4.2'
     compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.0.8'
+    implementation 'cn.jiguang.sdk:jcore:1.1.6'
 }

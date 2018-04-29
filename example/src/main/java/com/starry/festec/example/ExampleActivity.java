@@ -17,6 +17,7 @@ import com.starry.latte.ui.launcher.OnLauncherFinishTag;
 import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
+import cn.jpush.android.api.JPushInterface;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -39,6 +40,18 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+
+    }
 
     @Override
     public LatteDelegate setRootDelegate() {

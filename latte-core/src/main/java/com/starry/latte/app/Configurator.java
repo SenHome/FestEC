@@ -2,14 +2,18 @@ package com.starry.latte.app;
 
 
 import android.app.Activity;
+import android.os.Debug;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.Utils;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.starry.latte.delegates.web.event.Event;
 import com.starry.latte.delegates.web.event.EventManager;
+import com.starry.latte.util.log.DeBugKeys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +57,12 @@ public class Configurator {
         initIcons();
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY,true);
         Utils.init(Latte.getApplication());
+        //初始化Logger
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override public boolean isLoggable(int priority, String tag) {
+                return DeBugKeys.DEBUG;
+            }
+        });
     }
 
     public final Configurator withApiHost(String apiHost){
