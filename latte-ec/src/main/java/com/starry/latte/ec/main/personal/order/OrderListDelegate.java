@@ -45,7 +45,6 @@ public class OrderListDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-//        super.onBindView(savedInstanceState, rootView);
     }
 
     @Override
@@ -65,6 +64,7 @@ public class OrderListDelegate extends LatteDelegate {
                                 new OrderListDataConverter().setJsonData(response).convert();
                         final OrderListAdapter adapter = new OrderListAdapter(data);
                         mRecyclerView.setAdapter(adapter);
+                        mRecyclerView.addOnItemTouchListener(new OrderListClickListener(OrderListDelegate.this));
                     }
                 })
                 .build()
