@@ -6,6 +6,7 @@ import android.telecom.Call;
 
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.starry.festec.example.event.ShareEvent;
 import com.starry.latte.app.Latte;
 import com.starry.festec.example.event.TestEvent;
 import com.starry.latte.ec.database.DatabaseManager;
@@ -36,6 +37,7 @@ public class ExampleApp extends Application {
                 .withWeChatAppSecret("")
                 .withJavascriptInterface("latte")
                 .withWebEvent("test",new TestEvent())
+                .withWebEvent("share",new ShareEvent())
                 .configure();
 
 
