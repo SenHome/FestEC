@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.starry.latte.ui.camera.CameraImageBean;
 import com.starry.latte.ui.camera.LatteCamera;
 import com.starry.latte.ui.camera.RequestCode;
+import com.starry.latte.ui.scanner.ScannerDelegate;
 import com.starry.latte.util.callback.CallBackManager;
 import com.starry.latte.util.callback.CallbackType;
 import com.starry.latte.util.callback.IGlobalCallback;
@@ -42,6 +43,17 @@ public abstract class PermissionCheckerDelegate extends BaseDelegates {
     public void startCameraWithCheck() {
 
         PermissionCheckerDelegatePermissionsDispatcher.startCameraWithPermissionCheck(this);
+    }
+
+    //扫描二维码
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void starScan(BaseDelegates delegates){
+        delegates.getSupportDelegate().startForResult(new ScannerDelegate(),RequestCode.SCAN);
+    }
+
+    public void startScanWithCheck(BaseDelegates delegate) {
+
+        PermissionCheckerDelegatePermissionsDispatcher.starScanWithPermissionCheck(this,delegate);
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
@@ -128,5 +140,8 @@ public abstract class PermissionCheckerDelegate extends BaseDelegates {
                     break;
             }
         }
+
     }
+
+
 }

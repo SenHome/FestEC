@@ -23,11 +23,15 @@ import com.starry.latte.ui.recycler.BaseDecoration;
 import com.starry.latte.ui.recycler.MultipleFields;
 import com.starry.latte.ui.recycler.MultipleItemEntity;
 import com.starry.latte.ui.refresh.RefreshHandler;
+import com.starry.latte.util.callback.CallBackManager;
+import com.starry.latte.util.callback.CallbackType;
+import com.starry.latte.util.callback.IGlobalCallback;
 import com.starry.latte.util.log.LatteLogger;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by wangsen on 2018/4/19.
@@ -50,27 +54,24 @@ public class IndexDelegate extends BottomItemDelegate {
 
     private RefreshHandler mRefreshHandler = null;
 
+    @OnClick(R2.id.icon_idex_scan)
+    void onClickScanQrCode(){
+        startScanWithCheck(this.getParentDelegate());
+    }
+
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
-        //测试使用获取index_data数据
-//        RestClient
-//                .builder()
-//                .url("http://192.168.0.127/RestServer/data/index_data.json")
-//                .success(new ISuccess() {
-//                    @Override
-//                    public void onSucess(String response) {
-//                        final IndexDataConverter converter = new IndexDataConverter();
-//                        converter.setJsonData(response);
-//                        String jsonData = converter.getJsonData();
-//                        ArrayList<MultipleItemEntity> list = converter.convert();
-//                        final String image = list.get(1).getField(MultipleFields.IMAGE_URL);
-//                        Toast.makeText(getContext(), jsonData, Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .build()
-//                .get();
+        //二维码
+        CallBackManager.getInstance()
+                .addCallback(CallbackType.ON_SCAN, new IGlobalCallback<String>() {
+                    @Override
+                    public void executeCallback(@Nullable String args) {
+                        Toast.makeText(getContext(), "得到的二维码是" + args, Toast.LENGTH_LONG).show();
+
+                    }
+                });
     }
 
     private void initRefreshLayout(){

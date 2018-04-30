@@ -11,5 +11,6 @@ public enum CallbackType {
     //消息推送打开
     TAG_OPEN_PUSH,
     //消息推送关闭
-    TAG_STOP_PUSH
+    TAG_STOP_PUSH,
+    ON_SCAN
 }
