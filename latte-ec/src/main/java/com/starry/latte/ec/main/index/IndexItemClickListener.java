@@ -3,9 +3,13 @@ package com.starry.latte.ec.main.index;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.detail.GoodsDetailDelegate;
+import com.starry.latte.ui.recycler.MultipleFields;
+import com.starry.latte.ui.recycler.MultipleItemEntity;
+import com.starry.latte.util.log.LatteLogger;
 
 import java.security.Principal;
 
@@ -32,8 +36,10 @@ public class IndexItemClickListener extends SimpleClickListener {
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        final GoodsDetailDelegate delegate = GoodsDetailDelegate.create();
-        DELEGATE.start(delegate);
+        final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
+        final int goodsId = entity.getField(MultipleFields.ID);
+        final GoodsDetailDelegate delegate = GoodsDetailDelegate.create(goodsId);
+        DELEGATE.getSupportDelegate().start(delegate);
     }
 
     @Override

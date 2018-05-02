@@ -6,12 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.starry.latte.delegates.LatteDelegate;
 import com.starry.latte.ec.R;
 import com.starry.latte.ec.R2;
-import com.starry.latte.ec.main.personal.PersonOnClickListener;
 import com.starry.latte.ec.main.personal.address.AddressDelegate;
 import com.starry.latte.ec.main.personal.list.ListAdapter;
 import com.starry.latte.ec.main.personal.list.ListBean;
@@ -57,6 +55,7 @@ public class SettingsDelegate extends LatteDelegate {
                 })
                 .setText("消息推送")
                 .build();
+
 
         ListBean about = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
