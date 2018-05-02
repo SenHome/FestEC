@@ -14,5 +14,5 @@
 <img src="screenshot/7.jpg" width="32%" />
 <img src="screenshot/8.jpg" width="32%" />
 <img src="screenshot/9.jpgg" width="32%" />
-<img src="screenshot/10.jpg" width="34.7%" />
-<img src="screenshot/11.jpg" width="61.7%" /></p>
+<img src="screenshot/10.jpg" width="32%" />
+<img src="screenshot/11.jpg" width="32%" /></p>
