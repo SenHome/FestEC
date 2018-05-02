@@ -3,6 +3,7 @@ package com.starry.festec.example;
 import android.app.Application;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
+import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -39,6 +40,8 @@ public class ExampleApp extends Application {
                 .withWebEvent("test",new TestEvent())
                 .withWebEvent("share",new ShareEvent())
                 .configure();
+
+        Toast.makeText(this, "dfs", Toast.LENGTH_SHORT).show();
 
 
         initStetho();
